@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8>
+            </div>
+                <div id="bd" class="wrp clear-fix">
+                    <div id="main">
+                        {% for case in cases %}
+                            {% if case.case_file %}
+                            <div class="post">
+                                <div class="post-hd">
+                                    <h1 class="title"><a href="{% url 'robotcase:case_download' case.case_file %}" >{{ case.case_file }}</a></h1>
+                                </div>
+                                <div class="post-ft">
+                                    <i class="icon-date"></i>
+                                    <span class="date">{{ case.last_modified_time|date:"Y-n-d" }}</span>
+                                    <span>Grooming:<a href="{% url 'grooming:grooming_detail' case.id %}">{{ case.title }}</a> ;</span>
+                                    <span>{{ case.feature }};</span>
+                                    <span>{{ case.sprint }}</span>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

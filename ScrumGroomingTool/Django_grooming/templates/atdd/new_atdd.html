@@ -1,0 +1,119 @@
+{% extends 'base1.html' %}
+{% block content %}
+    <div id="banner" class="noselect"></div>
+        <div class="container">        
+            <div class="row">       
+                <form id="new_suite" action="" method="post"> 
+                  {% csrf_token %} 
+                  <div>
+                    <div id='suite'>  
+                      <div id='test'>
+                        <div id='subcase'>
+                        <div class="input-group" id = "testcase_input_group" >
+                          <div class="input-group-btn" id="testcase_btn_div">
+                            <button id = "testcase_button" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">CaseName <span class="caret"></span></button>
+                            <ul id = "precondition_ul" class="dropdown-menu">
+                               <li><a id="precondition" href="#" onClick="Add_Precondition(this)">Precondition</a></li>
+                               <li><a id = "operation" href="#" onClick="Add_Operation(this)">Operation</a></li>
+                            </ul>
+                          </div><!-- /btn-group -->
+                          <input type="text" class="form-control" aria-label="..." name='testname'>
+                          <span class="input-group-addon"><a href="#" class="glyphicon glyphicon-remove" onClick="Del_Case(this)"></a></span>
+                        </div><!-- /input-group -->
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                  <input type="button" value="Add Subcase" onClick="Add_SubCase()">       
+                  <input type="button" value="Save" onClick=Save_Value()> </button>
+                </form>
+            </div>   
+        </div>
+    </div>  
+
+<script language="javascript"> 
+
+  function Save_Value(){
+    var parentpage = window.opener.document.getElementById("id_content");
+    var nodeElement = document.getElementById("suite")
+    var Elements = nodeElement.getElementsByTagName("input");
+    //document.write(Elements);
+    var msgs="";
+    var casename="\n####Subcase: ";
+    var precondition="\n    *Precondtion:\n"
+    var operation="\n    *Operation:\n"
+    var expectresult="\n    *Expect Result:\n"
+    var checkpoint="\n    *Check Point:\n"
+    var blank="        "
+    var i;
+    for ( i in Elements ) {
+        if ( Elements[i].type == "text" ) {
+          switch (Elements[i].name){
+            case "testname":
+              msgs +=casename+blank+Elements[i].value;
+              break;
+            case "precondition":
+              msgs +=precondition+blank+Elements[i].value;
+              break;
+            case "operation":
+              msgs +=operation+blank+Elements[i].value;
+              break;
+            case "expectresult":
+              msgs +=expectresult+blank+Elements[i].value;
+              break;
+            case "checkpoint":
+              msgs +=checkpoint+blank+Elements[i].value;
+              break;
+            default:
+              break;
+          }
+        }
+    }
+    parentpage.value +=msgs
+    window.close()
+  }
+        
+  function Add_SubCase(){
+    var Test = document.getElementById("test"); 
+    var nodeFather = Test.parentNode;
+    var node_clone = Test.cloneNode();
+    content = '<div id="subcase">                      <div class="input-group" id = "testcase_input_group" >                          <div class="input-group-btn" id="testcase_btn_div">                            <button id = "testcase_button" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">CaseName <span class="caret"></span></button>                           <ul id = "precondition_ul" class="dropdown-menu">                               <li><a id="precondition" href="#" onClick="Add_Precondition(this)">Precondition</a></li>                               <li><a id = "operation" href="#" onClick="Add_Operation(this)">Operation</a></li>                            </ul>                          </div><!-- /btn-group -->                          <input type="text" class="form-control" aria-label="..." name="testname"> <span class="input-group-addon"><a href="#" class="glyphicon glyphicon-remove" onClick="Del_Case(this)"></a></span>                       </div>                        <div id="operation"></div>                      </div>';
+    node_clone.innerHTML = content;
+    nodeFather.appendChild(node_clone);
+  }
+          
+  function Add_Operation(e){
+    var Test =  e.parentNode.parentNode.parentNode.parentNode;
+            //var Operation = document.getElementById("operation"); 
+    var nodeFather = Test.parentNode;
+    var node_clone = Test.cloneNode();
+            //var node_clone = Operation.cloneNode();
+    var content = '<div class="input-group"> <span class="input-group-addon">Op</span>  <input type="text" class="form-control" placeholder="operation" name="operation"><span class="input-group-addon">Ex</span><input type="text" class="form-control" placeholder="expect result" name="expectresult"><span class="input-group-addon">Ch</span><input type="text" class="form-control" placeholder="check point" name="checkpoint"><span class="input-group-addon"><a href="#" class="glyphicon glyphicon-remove" onClick="Del_Operation(this)"></a></span></div>';
+            //node_clone.removeAttribute('id');
+    node_clone.innerHTML += content;
+    nodeFather.appendChild(node_clone);
+    }
+    
+    function Add_Precondition(e){
+      var test = e.parentNode.parentNode.parentNode.parentNode;
+            //alert(test.getAttribute("id"))
+      var precondition = '<div class="input-group"><span class="input-group-addon">Precondition</span><input type="text" class="form-control" placeholder="precondition" name="precondition"></div>';
+      var nodeFather = test.parentNode;
+      var node_clone = test.cloneNode();
+      node_clone.innerHTML +=precondition;
+      nodeFather.appendChild(node_clone);
+    }
+
+    function Del_Operation(e){
+      var Fathernode = e.parentNode.parentNode.parentNode;
+      Fathernode.removeChild(e.parentNode.parentNode)
+
+    }
+
+    function Del_Case(e){
+      var Fathernode = e.parentNode.parentNode.parentNode.parentNode;
+      Fathernode.removeChild(e.parentNode.parentNode.parentNode)
+    }
+
+</script>  
+{% endblock %}

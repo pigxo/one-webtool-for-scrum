@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="jumbotron">
+    <div class="container" >
+        <div class="row">
+                <div id="main">
+                    <div id="post-1951"
+                         class="post-1951 post type-post status-publish format-standard hentry category-large-report">
+                        <div class="post-hd">
+                            <h1 class="title">{{ grooming_detail.title }}</h1>
+                                <p align="right">
+                                <a href="{% url 'grooming:grooming_detail_eidt' grooming_detail.pk %}" class="more" >Edit</a></p>
+                        </div>
+                        <div class="date-read">
+                            <i class="icon-date"></i>
+                            <span class="date">{{ grooming_detail.last_modified_time|date:"Y-n-d" }}</span>
+                        </div>
+                             Sprint: {{ grooming_detail.sprint }};&nbsp;&nbsp;Feature:{{ grooming_detail.feature }}<br>
+                             {% if grooming_detail.case_file %}
+                             case file: <a href="{% url 'robotcase:case_download' grooming_detail.case_file %}" >{{ grooming_detail.case_file }}</a><br>
+                             {% endif %}
+                             <br><b><h3> Scope:</h3></b><br>{{ grooming_detail.scope |safe }}<br>
+                             <br><b><h3> Questions:</h3></b><br> {{ grooming_detail.question |safe }}<br>
+                             <br><b><h3> Assumptions:</h3></b><br> {{ grooming_detail.assumption |safe }} <br>
+                             <br><b><h3> ATDD:</h3></b><br>{{ grooming_detail.content| safe }}
+                             
+                    </div>
+
+                </div>
+            </div>
+            <ul class="pager">
+               <li><a href="{% url 'grooming:grooming_detail' grooming_detail_pre %}" class=".previous-post">Previous</a></li>
+               <li><a href="{% url 'grooming:grooming_detail' grooming_detail_next %}" class=".next-post">Next</a></li>
+            </ul>
+        
+    </div>
+</div>    
+{% endblock %}

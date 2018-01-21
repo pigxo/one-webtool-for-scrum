@@ -1,0 +1,4 @@
+{{ object.title }}
+{{ object.sprint}}
+{{ object.feature}}
+{{ object.last_modified_time}}

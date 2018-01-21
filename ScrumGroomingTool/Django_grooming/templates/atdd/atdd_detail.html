@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div id="bd" class="wrp clear-fix">
+                <div id="main">
+                    <div id="post-1951"
+                         class="post-1951 post type-post status-publish format-standard hentry category-meida-report">
+                        <div class="post-hd">
+                            <h1 class="title">{{ atdd_detail.suitename }}</h1>
+                        </div>
+                             <br><b><h3> Scope:</h3></b><br>{{ atdd_detail.testname |safe }}<br>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

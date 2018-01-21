@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div id="banner" class="noselect"></div>
+
+                <form action="" method="post">
+                   {% csrf_token %}
+                   <div class="container-fluid" >
+                   <p><b/>Title: {{ form.title }} </p>
+                   <p><b/>Sprint: {{ form.sprint }} Item: {{ form.item }}
+                   SWCostTime: {{ form.sw_cost_time }}  IVCostTime: {{ form.iv_cost_time }} </p>
+                   </div>
+                   <div class="jumbotron">
+                   <div class="container-fluid" >
+                   <p><b/>Scope: {{ form.scope }} </p>
+                   </div>
+                   </div>
+                   <div class="jumbotron">
+                   <div class="container-fluid">
+                   <p><b/>Question: {{ form.question }} </p>
+                   </div>
+                   </div>
+                   <div class="jumbotron">
+                   <div class="container-fluid">
+                   <p><b/>Assumption: {{ form.assumption }} </p>
+                   </div>
+                   </div>
+                   <div class="jumbotron">
+                   <div class="container-fluid">
+                   <p><b/>ATDD: {{ form.content }} </p>
+                   <input type="button" value="Add ATDD Case Suite" onClick="window.open('../newatdd','_blank','scrollbars=yes,resizable=no,width=1000,height=600')">
+                   </div>
+                   </div>
+
+                  <input type="submit" value="Submit"> </button>
+                </form>
+
+    </div>
+{% endblock %}

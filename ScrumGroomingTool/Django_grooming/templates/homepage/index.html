@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div id="banner" class="noselect"></div>
+
+    <div class="container">
+        <div class="row">
+            <p>
+                {% for item in edit %}
+                {{ item.content|safe }}
+                {% endfor %}
+            </p>     
+                <a href="{% url 'homepage:index_detail'  %}" class="more">Edit>></a>
+        </div>
+    </div>
+{% endblock %}

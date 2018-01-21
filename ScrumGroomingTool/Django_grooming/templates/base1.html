@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Mygrooming</title>
+    <link rel="stylesheet" href="{% static 'lib/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pygments/github.css' %}">
+</head>
+<body>
+
+
+{% block content %}{% endblock %}
+
+<div id="footer" class="noselect">
+    <div id="copyright">&copy; djangogrooming</div>
+</div>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>

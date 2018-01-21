@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid" data-spy="affix" data-offset-top="60" data-offset-bottom="200"  id="myNav">  
+     <form role="search" name="box" action="search/?q=q" input method="get" >
+           <div class="input-group" > 
+           <span class="input-group-btn">
+               <button class="btn btn-link btn-sm" type="submit"><i>Search</i></button>
+               </span>
+               <input class="form-control " name="q"  style="width: 20%" type="text"> 
+               
+            </div>
+        </form> 
+    <div>
+        <a class="btn btn-link navbar-btn btn-sm" href="{% url 'grooming:grooming_create' %}" ><i>Create</i></a>
+    </div>
+</div>
+    <div class="container">
+        <div class="row">
+                    <div id="main">
+                        {% for grooming in grooming_list %}
+                            <div class="post">
+                                <div class="post-hd">
+                                    <h1 class="title"><a
+                                            href="{% url 'grooming:grooming_detail' grooming.id %}">{{ grooming.title }}</a></h1>
+                                </div>
+                                <div class="post-ft">
+                                    <a href="{% url 'grooming:grooming_detail' grooming.id %}" class="more">More>></a>
+                                    <i class="icon-date"></i>
+                                    <span class="date">{{ grooming.last_modified_time|date:"Y-n-d" }}</span>
+                                    <span>{{ grooming.feature }};</span>
+                                    <span>{{ grooming.sprint }}</span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+    </div>
+
+{% endblock %}
